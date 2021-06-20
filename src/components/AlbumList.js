@@ -39,8 +39,7 @@ const AlbumList = () =>{
   
   return (
     <View style={{flex: 1}}>
-      {/* TODO Replace ScrollView for FlatList */}
-      <ScrollView>{this.renderAlbums()}</ScrollView>
+      <FlatList>{this.renderAlbums()}</FlatList>
     </View>
   );
 
