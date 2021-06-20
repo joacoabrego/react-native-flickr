@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, Text, View, FlatList } from 'react-native';
 import axios from 'axios';
 import AlbumDetail from './AlbumDetail';
-import { useEffect } from 'react/cjs/react.production.min';
 
-const AlbumList = () =>{
+const AlbumList = ({navigation}) =>{
 
   const [photoset, setPhotoset] = useState(null);
   
@@ -19,30 +18,27 @@ const AlbumList = () =>{
       fetchPhotoset();
   }, []);
 
-  const renderAlbums = () => {
-    return photoset.map((album) => (
+  const renderItem = ({ item }) => (
       <AlbumDetail
-        navigation={this.props.navigation}
-        key={album.id}
-        title={album.title._content}
-        albumId={album.id}
+        navigation={navigation}
+        key={item.id}
+        title={item.title._content}
+        albumId={item.id}
       />
-    ));
-  }
-
-
-  console.log(photoset);
+  );
 
   if (!photoset) {
     return <Text>Loading...</Text>;
   }
-  
+
   return (
     <View style={{flex: 1}}>
-      <FlatList>{this.renderAlbums()}</FlatList>
+      <FlatList 
+        data={photoset} 
+        renderItem={renderItem}
+      />
     </View>
   );
-
 }
 
 export default AlbumList;

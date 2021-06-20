@@ -1,35 +1,31 @@
-import React, { useState, useEffect} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, Text, View, FlatList } from 'react-native';
 import axios from 'axios';
 import PhotoDetail from './PhotoDetail';
 
-const PhotoList = () => {
-
+const PhotoList = ({route}) => {
+  console.log('functional photolist', route.params.albumId);
   const [photos, setPhotos] = useState(null);
 
   useEffect(() => {
-    
     const fetchPhotos = async () =>{
-      const { data } = await axios.get(
-        `https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photoset_id=${this.props.route.params.albumId}&user_id=137290658%40N08&format=json&nojsoncallback=1`,
-      )
-        setPhotos(data.photoset.photo);
-    }
+      const { data } = await axios
+      .get(
+        `https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photoset_id=${route.params.albumId}&user_id=137290658%40N08&format=json&nojsoncallback=1`,
+      );
 
-    fetchPhotos();
+      setPhotos(data.photoset.photo);
+    }
+      fetchPhotos();
   }, []);
 
-  const renderAlbums = () => {
-    return photos.map((photo) => (
+  const renderItem = ({item}) => (
       <PhotoDetail
-        key={photo.title}
-        title={photo.title}
-        imageUrl={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`}
+        key={item.title}
+        title={item.title}
+        imageUrl={`https://farm${item.farm}.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`}
       />
-    ));
-  }
-
-  console.log(photos);
+  )
 
   if (!photos) {
     return (
@@ -41,7 +37,10 @@ const PhotoList = () => {
 
   return (
     <View style={{flex: 1}}>
-      <FlatList>{this.renderAlbums()}</FlatList>
+      <FlatList 
+        data={photos} 
+        renderItem={renderItem}
+      />
     </View>
   );
 }
