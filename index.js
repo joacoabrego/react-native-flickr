@@ -8,6 +8,7 @@ import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 import AlbumList from './src/components/AlbumList';
 import PhotoList from './src/components/PhotoList';
+import Home from './src/components/Home';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -16,7 +17,12 @@ const Stack = createStackNavigator();
 // Create a component
 const App = () => (
   <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="home">
+      <Stack.Screen
+        name="home"
+        component={Home}
+        options={{title: 'Home'}}
+      />
       <Stack.Screen
         name="albumList"
         component={AlbumList}
