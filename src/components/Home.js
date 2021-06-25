@@ -36,7 +36,9 @@ const Home = ({ navigation }) =>{
                 </View>    
 
                 <View style={{marginLeft:10}}>
-                    <Button title="Type n' Search">
+                    <Button 
+                        onPress={()=> navigation.navigate('search')}
+                        title="Type n' Search">
                     </Button>
                 </View>
 

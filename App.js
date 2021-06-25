@@ -4,6 +4,7 @@ import React from 'react';
 import AlbumList from './src/components/AlbumList';
 import PhotoList from './src/components/PhotoList';
 import Home from './src/components/Home';
+import Search from './src/components/Search';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -17,6 +18,11 @@ export default  App = () => (
         name="home"
         component={Home}
         options={{title: 'Home'}}
+      />
+      <Stack.Screen
+        name="search"
+        component={Search}
+        options={{title: "Type N' Search"}}
       />
       <Stack.Screen
         name="albumList"
