@@ -37,6 +37,7 @@ const styles = {
   },
   headerTextStyle: {
     fontSize: 18,
+    textTransform: 'capitalize'
   },
   thumbnailStyle: {
     height: 50,

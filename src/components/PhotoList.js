@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, Text, View, FlatList } from 'react-native';
 import axios from 'axios';
 import PhotoDetail from './PhotoDetail';
+import Spinner from './Spinner';
 
 const PhotoList = ({route}) => {
   console.log('functional photolist', route.params.albumId);
@@ -30,7 +31,7 @@ const PhotoList = ({route}) => {
   if (!photos) {
     return (
       <View style={{flex: 1}}>
-        <Text>Loading...</Text>
+        <Spinner text='Loading photos...'/>
       </View>
     );
   }

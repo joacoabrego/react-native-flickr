@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, Text, View, FlatList } from 'react-native';
 import axios from 'axios';
 import AlbumDetail from './AlbumDetail';
+import Spinner from './Spinner';
 
 const AlbumList = ({navigation}) =>{
 
@@ -28,7 +29,7 @@ const AlbumList = ({navigation}) =>{
   );
 
   if (!photoset) {
-    return <Text>Loading...</Text>;
+    return <Spinner text='Loading...'/>;
   }
 
   return (
